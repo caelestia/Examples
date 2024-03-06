@@ -1,0 +1,129 @@
+\documentclass[17pt]{extarticle}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{tikz-cd}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{enumitem}
+\usepackage{lmodern, fixcmex}
+
+\title{Examples}
+\author{Caelestia }
+
+\theoremstyle{definition}\newtheorem{example}{Example}[]
+\theoremstyle{definition}\newtheorem{corollary}[example]{Corollary}
+\theoremstyle{definition}\newtheorem{definition}[example]{Definition}
+\theoremstyle{definition}\newtheorem{lemma}[example]{Lemma}
+\theoremstyle{definition}\newtheorem{theorem}[example]{Theorem}
+\theoremstyle{definition}\newtheorem{proposition}[example]{Proposition}
+\theoremstyle{definition}\newtheorem{remark}[example]{Remark}
+
+\begin{document}
+
+\maketitle\newpage
+
+\begin{example}
+    As $\mathbb{Q}$-modules,
+    $$\mathbb{R}\simeq\mathbb{R}/\mathbb{Q}.$$
+
+\end{example}
+
+\begin{proof}
+    Simple cardinal arithmetics will do. See below properties for details.
+\end{proof}
+
+\begin{example}
+    We state one method of evaluating the Riemann zeta function $\zeta$ at even positive integers, that is
+    $$\zeta(2n)=\frac{(-1)^{n+1}2^{2n-1}}{(2n)!}\pi^{2n}B_{2n},$$
+    where $n\in\mathbb{Z}_{>0}$ and the Berboulli numbers $B_k$ are given by
+    $$\frac{z}{\mathrm{e}^z-1}=\sum_{k=0}^\infty\frac{B_k}{k!}z^k.$$
+\end{example}
+
+\begin{proof}
+    In fact, we can directly show the following \emph{pole expansion}:
+    \begin{equation}\label{csc2}
+        \frac{\pi^2}{\sin^2(\pi z)}=\sum_{n\in\mathbb{Z}}\frac{1}{(n+z)^2}.
+    \end{equation}
+    The reason is that the difference between the two sides is clearly entire and $1$-periodic, and in fact bounded, because
+    $$\lim_{\operatorname{Im}z\to\pm\infty}\frac{\pi^2}{\sin^2(\pi z)}=\lim_{\operatorname{Im}z\to\pm\infty}\sum_{n\in\mathbb{Z}}\frac{1}{(n+z)^2}=0.$$
+    The second equality can be deduced, for example, by DCT.
+    
+    Now Liouville's theorem applies and (\ref{csc2}) is established. Find the Laurent expansion of the terms in (\ref{csc2}) at $0<|z|<1\leq|n|$:
+    $$\frac{1}{(n+z)^2}=-\frac{\mathrm{d}}{\mathrm{d}z}\frac{1}{n+z}=\frac{1}{n^2}\sum_{k=0}^\infty(k+1)\left(-\frac{z}{n}\right)^k.$$
+    
+    Hence
+    $$\frac{\pi^2}{\sin^2(\pi z)}=\frac{1}{z^2}+\sum_{n\in\mathbb{Z}^*}\frac{1}{n^2}\sum_{k=0}^\infty(k+1)\left(-\frac{z}{n}\right)^k.$$
+    
+    Notice that
+    $$\left|\frac{1}{n^2}\sum_{k=0}^\infty(k+1)\left(-\frac{z}{n}\right)^k\right|\leq\frac{1}{(n-|z|)^2},$$
+    thus DCT allows us to interchange the sums and derive
+    \begin{align*}
+        \frac{\pi^2}{\sin^2(\pi z)} &=\frac{1}{z^2}+\sum_{k=0}^\infty(k+1)(-z)^k\sum_{n\in\mathbb{Z}^*}\frac{1}{n^{k+2}} \\
+        &=\frac{1}{z^2}+2\sum_{\substack{k=0\\ \text{even}}}^\infty(k+1)(-z)^k\zeta(k+2).
+    \end{align*}
+
+    Finally, to see how this is related to the Bernoulli numbers, we have
+    $$\cot z=1+\frac{2}{e^{2\mathrm{i}z}-1},$$
+    and
+    $$(\cot z)'=-\frac{1}{\sin^2z},$$
+    finishing the proof.
+\end{proof}
+
+\begin{example}
+    Let $R$ be a commutative ring and $V$ be a finite-rank free module over $R$. Then $V\xrightarrow{\sim}V^\vee$ and there is the natural pairing
+    $$B:V\times V^\vee\longrightarrow R.$$
+
+    Now make $R$ a field and $B$ will be nondegenerate, meaning that $V\xrightarrow{\sim}(V^\vee)^\vee$. We claim that for every $n\in\mathbb{Z}_{\geq 0}$, $B$ gives rise to the following nondegenerate pairings
+    $$T^n(V)\times T^n(V^\vee)\longrightarrow R,$$
+    $$\bigwedge^n(V)\times \bigwedge^n(V^\vee)\longrightarrow R,$$
+    and if $\operatorname{char}R=0$ or $n<\operatorname{char}R$,
+    $$\operatorname{Sym}^n(V)\times \operatorname{Sym}^n(V^\vee)\longrightarrow R.$$
+\end{example}
+
+\begin{proof}
+    In fact these are isomorphisms of $R$-graded algebras:
+    $$T(V)^\vee\xrightarrow{\sim}T(V^\vee),\ 
+    (\bigwedge V)^\vee\xrightarrow{\sim}\bigwedge(V^\vee),\
+    \operatorname{Sym}(V)^\vee\xrightarrow{\sim}\operatorname{Sym}(V^\vee),$$
+    where the graded algebra structures of the LHS graded modules are given by 
+    \begin{flushleft}
+    \begin{align*}
+        &\alpha\in (V^{\otimes n})^\vee,\beta\in (V^{\otimes m})^\vee,\\
+        \alpha\otimes\beta:&v_1\otimes\cdots\otimes v_{n+m}\mapsto\\
+        &\alpha(v_1\otimes\cdots\otimes v_n)\beta(v_{n+1}\otimes\cdots\otimes v_{n+m});
+    \end{align*}
+    \end{flushleft}
+
+    \begin{flushleft}
+    \begin{align*}
+        &\alpha\in (\bigwedge^nV)^\vee,\beta\in (\bigwedge^mV)^\vee,\\
+        \alpha\wedge\beta:&v_1\wedge\cdots\wedge v_{n+m}\mapsto\\
+        \sum_{\sigma\in S_{n,m}}&\operatorname{sgn}(\sigma)\alpha(v_{\sigma(1)}\wedge\cdots\wedge v_{\sigma(n)})\beta(v_{\sigma(n+1)}\wedge\cdots\wedge v_{\sigma(n+m)});
+    \end{align*}
+    \end{flushleft}
+
+    \begin{flushleft}
+    \begin{align*}
+        &\alpha\in (\operatorname{Sym}^nV)^\vee,\beta\in (\operatorname{Sym}^mV)^\vee,\\
+        \alpha\beta:&v_1v_2\cdots v_{n+m}\mapsto\\
+        &\sum_{\sigma\in S_{n,m}}\alpha(v_{\sigma(1)}\cdots v_{\sigma(n)})\beta(v_{\sigma(n+1)}\cdots v_{\sigma(n+m)});
+    \end{align*}
+    \end{flushleft}
+    where $\sigma\in S_{n,m}$ implies $\sigma(1)<\sigma(2)<\cdots<\sigma(n)$ and $\sigma(n+1)<\sigma(n+2)<\cdots<\sigma(n+m)$. From these we can directly check the desired isomorphisms. However, it would still be useful to directly give the pairings mentioned a while ago, as follows:
+    \begin{itemize}
+        \item $B^{\otimes n}$ is given by
+        \[ \begin{tikzcd}
+            V^{\otimes n}\otimes (V^\vee)^{\otimes n} \arrow[r, "\sim"] &(V\otimes V^{\vee})^{\otimes n} \arrow[r, "\operatorname{Tr}^{\otimes n}"] & R^{\otimes n} \arrow[r, "\sim"] & R.
+        \end{tikzcd} \]
+        The dual base to $v_{i_1}\otimes\cdots\otimes v_{i_n}$ is $\check{v}_{i_1}\otimes\cdots\otimes\check{v}_{i_n}$.
+        
+        \item $\bigwedge^nB$ is given by the quotient of $B^{\otimes n}$, or more explicitly
+        \[ \begin{tikzcd}[row sep=tiny]
+            V^{\otimes n}\otimes(V^\vee)^{\otimes n} \arrow[r] & R \\
+            (v_1\otimes\cdots\otimes v_n)\otimes(\check{w}_1\otimes\cdots\otimes\check{w}_n) \arrow[r, mapsto] & \det(\check{w}_iv_j)_{i,j}
+        \end{tikzcd} \]
+        The dual base to $v_{i_1}\wedge\cdots\wedge v_{i_n}$ is $\check{v}_{i_1}\wedge\cdots\wedge\check{v}_{i_n}$. This natural isomorphism \begin{tikzcd}\bigwedge^n(V^\vee)\arrow[r, "\sim"]&(\bigwedge^nV)^\vee\end{tikzcd} is also known as the \emph{contraction}.
+    \end{itemize}
+\end{proof}
+
+\end{document}
